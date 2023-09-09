@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int n;
+    char input;
+    scanf("%d", &n);
+    int count = 0;
+    int flag = 0;
+    int answer = 0;
+    scanf("%c", &input);
+    for (int i = 0; i < n; i++)
+    {
+        if (count == 8)
+        {
+            count = 0;
+            if (flag != 0)
+            {
+                printf(" ");
+            }
+            printf("%d", answer);
+            flag = 1;
+            answer = 0;
+        }
+        scanf("%c", &input);
+        if (input == '1')
+        {
+            answer += pow(2, count);
+        }
+        count++;
+    }
+    if (flag == 0)
+    {
+        printf("%d", answer);
+    }
+    else
+    {
+        printf(" %d", answer);
+    }
+    return 0;
+}
