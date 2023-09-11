@@ -1,48 +1,42 @@
 #include <stdio.h>
 
+int max(int a, int b);
+
 int main()
 {
-    int a1, a2, b1, b2, c1, c2, max_a, min_a, max_b, min_b, max_c, min_c;
+    int a1, a2, b1, b2, c1, c2;
+    int flag = 0;
     scanf("%d %d %d %d %d %d", &a1, &a2, &b1, &b2, &c1, &c2);
-    if (a1 * a2 < b1 * b2 + c1 * c2)
+    if (a1 * a2 >= b1 * b2 + c1 * c2)
     {
-        if (a1 > a2)
+        if ((a1 >= b1 + c1 && a2 >= max(b2, c2)) || (a1 >= b2 + c2 && a2 >= max(b1, c1)) || (a1 >= b1 + c2 && a2 >= max(b2, c1)) || (a1 >= b2 + c1 && a2 >= max(b1, c2)))
         {
-            max_a = a1;
-            min_a = a2;
+            flag = 1;
         }
-        else
+        else if ((a2 >= b1 + c1 && a1 >= max(b2, c2)) || (a2 >= b2 + c2 && a1 >= max(b1, c1)) || (a2 >= b1 + c2 && a1 >= max(b2, c1)) || (a2 >= b2 + c1 && a1 >= max(b1, c2)))
         {
-            max_a = a2;
-            min_a = a1;
+            flag = 1;
         }
-        if (b1 > b2)
-        {
-            max_b = b1;
-            min_b = b2;
-        }
-        else
-        {
-            max_b = b2;
-            min_b = b1;
-        }
-        if (c1 > c2)
-        {
-            max_c = c1;
-            min_c = c2;
-        }
-        else
-        {
-            max_c = c2;
-            min_c = c1;
-        }
-        if (max_a >= max_b && max_a >= max_c && min_a >= min_b && min_a >= min_c)
-        {
-        }
+    }
+    if (flag == 1)
+    {
+        printf("YES");
     }
     else
     {
         printf("NO");
     }
     return 0;
+}
+
+int max(int a, int b)
+{
+    if (a > b)
+    {
+        return a;
+    }
+    else
+    {
+        return b;
+    }
 }
