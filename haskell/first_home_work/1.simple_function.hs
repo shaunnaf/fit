@@ -17,4 +17,4 @@ distance :: Double -> Double -> Double -> Double -> Double
 distance x1 y1 x2 y2 = sqrt((x2-x1)^2 + (y2-y1)^2)
 
 leap :: Int -> Bool
-leap x = if ((x `rem` 400)==0 || ((x `rem` 100) /= 0 && (x `rem` 4) == 0)) then True else False
+leap x = ((x `rem` 400)==0 || ((x `rem` 100) /= 0 && (x `rem` 4) == 0))
