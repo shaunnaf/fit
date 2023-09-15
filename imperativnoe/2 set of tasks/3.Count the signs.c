@@ -3,10 +3,8 @@
 
 int main()
 {
-    int count_numbers, number;
-    int negative = 0;
-    int null = 0;
-    int positive = 0;
+    int count_numbers, number, negative, null, positive;
+    negative = null = positive = 0;
     double ans;
     scanf("%d", &count_numbers);
     for (int i = 0; i < count_numbers; i++)

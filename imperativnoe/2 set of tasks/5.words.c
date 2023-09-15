@@ -3,9 +3,9 @@
 int main()
 {
     char c;
-    int answer = 0;
+    int answer, flag;
+    answer = flag = 0;
     scanf("%c", &c);
-    int flag = 0;
     while (c != '\n')
     {
         if (c != '.')

@@ -3,12 +3,10 @@
 
 int main()
 {
-    int n;
+    int n, count, flag, answer;
     char input;
     scanf("%d", &n);
-    int count = 0;
-    int flag = 0;
-    int answer = 0;
+    count = flag = answer = 0;
     scanf("%c", &input);
     for (int i = 0; i < n; i++)
     {
