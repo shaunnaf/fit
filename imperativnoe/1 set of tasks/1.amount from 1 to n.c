@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-int main(void) {
-    int n, s;
+int main(void)
+{
+    float n;
+    int s;
     s = 0;
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++) {
-        s += i;
-    }
-    printf("%d\n", s);
+    scanf("%f", &n);
+    s = (1 + n) / 2 * n;
+    printf("%d", s);
     return 0;
 }
