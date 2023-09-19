@@ -3,12 +3,12 @@
 
 void reading_count(int *count, int *error);
 void reading_numbers(int *error, int count, int *array);
-void counting(int *array, int count);
+void counting(int count, int *array);
 
 int main()
 {
-    int count, error;
-    error = 0;
+    int count, error, answer;
+    error = answer = 0;
     reading_count(&count, &error);
     if (error == 0)
     {
@@ -16,7 +16,7 @@ int main()
         reading_numbers(&error, count, array);
         if (error == 0)
         {
-            counting(array, count);
+            counting(count, array);
         }
         else
         {
@@ -33,7 +33,7 @@ int main()
 
 void reading_count(int *count, int *error)
 {
-    if (scanf("%d", count) != 1 || *count < 1 || *count > 100)
+    if (scanf("%d", count) != 1 || *count < 1 || *count > 100000)
     {
         *error = 1;
     }
@@ -43,7 +43,7 @@ void reading_numbers(int *error, int count, int *array)
 {
     for (int i = 0; i < count; i++)
     {
-        if (scanf("%d", &array[i]) != 1)
+        if (scanf("%d", &array[i]) != 1 || array[i] < 1 || array[i] > 10000)
         {
             *error = 1;
             break;
@@ -51,20 +51,16 @@ void reading_numbers(int *error, int count, int *array)
     }
 }
 
-void counting(int *array, int count)
+void counting(int count, int *array)
 {
-    int answer = 0;
-    for (int i = 0; i < count - 1; i++)
+    int answer;
+    for (int i = 0; i < count; i++)
     {
-        for (int j = i + 1; j < count; j++)
-        {
-            if (array[i] > array[j])
-            {
-                answer += 1;
-            }
-        }
-        printf("%d ", answer);
         answer = 0;
+        for (int j = i; j < count; j += i + 1)
+        {
+            answer += array[j];
+        }
+        printf("%d\n", answer);
     }
-    printf("0");
 }
