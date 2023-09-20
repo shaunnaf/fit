@@ -9,8 +9,7 @@ int main()
     curr_floor = curr_entrance = 1;
     scanf("%d", &number_flat_new);
     scanf("%d %d %d %d", &number_flat, &entrance, &floor, &max_floor);
-    flats_on_floor =
-        ceilf((float)number_flat / (max_floor * (entrance - 1) + floor));
+    flats_on_floor = ceilf((float)number_flat / (max_floor * (entrance - 1) + floor));
     while (number_flat_new > flats_on_floor)
     {
         number_flat_new -= flats_on_floor;
