@@ -1,22 +1,35 @@
-#include <math.h>
 #include <stdio.h>
 
-int main() {
+int main()
+{
     float a, b, res;
     scanf("%f %f", &a, &b);
-    res = a / b;
-    res = floorf(a / b);
-    printf("%d", (int)res);
-    res = ceilf(a / b);
-    printf(" %d", (int)res);
-    if (a / b > 0) {
-        res = floorf(a / b);
-    } else {
-        res = ceilf(a / b);
-    }
-    printf(" %d", (int)res);
     int r = (int)a % (int)b;
-    if (r < 0) {
+    res = a / b;
+    if (res >= 0)
+    {
+        if (r == 0)
+        {
+            printf("%d %d %d", (int)res, (int)res, (int)res);
+        }
+        else
+        {
+            printf("%d %d %d", (int)res, (int)(res + 1), (int)res);
+        }
+    }
+    else
+    {
+        if (r == 0)
+        {
+            printf("%d %d %d", (int)res, (int)res, (int)res);
+        }
+        else
+        {
+            printf("%d %d %d", (int)res - 1, (int)res, (int)res);
+        }
+    }
+    if (r < 0)
+    {
         r += b;
     }
     printf(" %d", r);
