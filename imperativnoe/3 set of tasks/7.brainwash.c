@@ -19,7 +19,15 @@ int main()
             quickSort(array, 0, count - 1);
             print_array(array, count);
         }
+        else
+        {
+            printf("ERROR");
+        }
         free(array);
+    }
+    else
+    {
+        printf("ERROR");
     }
     return 0;
 }

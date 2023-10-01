@@ -22,8 +22,16 @@ int main()
             free(array_value_y);
             free(array_answer);
         }
+        else
+        {
+            printf("ERROR");
+        }
         free(array_x);
         free(array_y);
+    }
+    else
+    {
+        printf("ERROR");
     }
     return 0;
 }

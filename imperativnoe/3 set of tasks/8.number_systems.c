@@ -19,6 +19,14 @@ int main()
         {
             translate_to_number_system(sum_10, end_number_system);
         }
+        else
+        {
+            printf("ERROR");
+        }
+    }
+    else
+    {
+        printf("ERROR");
     }
     return 0;
 }
