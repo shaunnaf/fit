@@ -9,6 +9,7 @@ int main()
 {
     char *array = (char *)malloc(1000 * sizeof(char));
     calculate_answer(array);
+    free(array);
     return 0;
 }
 
