@@ -40,11 +40,10 @@ int read_time(int count_time)
         if (scanf("%d %d %d", &hours, &minutes, &seconds) != 3)
         {
             error = 1;
-            goto ret;
+            break;
         }
         printTime(hours, minutes, seconds);
     }
-ret:
     return error;
 }
 
