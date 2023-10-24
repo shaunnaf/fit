@@ -18,15 +18,23 @@ int main()
     {
         flats_on_floor = (int)((float)number_flat / (max_floor * (entrance - 1) + floor)) + 1;
     }
-    while (number_flat_new > flats_on_floor)
+    r = number_flat_new % (flats_on_floor * max_floor);
+    if (r == 0)
     {
-        number_flat_new -= flats_on_floor;
-        curr_floor += 1;
-        if (curr_floor > max_floor)
-        {
-            curr_floor = 1;
-            curr_entrance += 1;
-        }
+        curr_entrance = (float)number_flat_new / (flats_on_floor * max_floor);
+    }
+    else
+    {
+        curr_entrance = (int)(float)number_flat_new / (flats_on_floor * max_floor) + 1;
+    }
+    int temp = number_flat_new - (curr_entrance - 1) * flats_on_floor * max_floor;
+    if (temp % flats_on_floor == 0)
+    {
+        curr_floor = (float)temp / flats_on_floor;
+    }
+    else
+    {
+        curr_floor = (int)(float)temp / flats_on_floor + 1;
     }
     printf("%d %d", curr_entrance, curr_floor);
     return 0;
