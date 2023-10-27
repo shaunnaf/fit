@@ -92,7 +92,7 @@ void answer(int *array_x, int *array_y, int count_pair, int *array_value_x, int 
         array_answer[2] = 1;
         array_answer[3] = 1;
     }
-    if (array_answer[2] == 1 || array_answer[3] == 1)
+    if (array_answer[2] == 1 && array_answer[3] == 1)
     {
         array_answer[4] = 1;
     }
