@@ -7,10 +7,10 @@ bool prime(int n);
 int main(void) {
   int n;
   scanf("%d", &n);
-  for (int i = 1; i <= n; i++) {
-    if (prime(i)) {
-      printf("%d\n", i);
-    }
+  if (prime(n) == 1) {
+    printf("YES");
+  } else {
+    printf("NO");
   }
   return 0;
 }

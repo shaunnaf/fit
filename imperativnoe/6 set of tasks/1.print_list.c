@@ -11,7 +11,7 @@ int scan_data(double *value, int *index);
 void add_data(node *array, int count_numbers_in_array);
 void print_answer(node *array, int count_number_in_array, int first_index);
 
-int main() {
+int main(void) {
   int count_numbers_in_array, first_index;
   if (scan_count(&count_numbers_in_array, &first_index)) {
     printf("error");
