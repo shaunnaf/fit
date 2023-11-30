@@ -4,7 +4,6 @@ clock :: Clock -> Clock
 clock (Clock h m)
   | m >= 0 && m < 60 = Clock (h `mod` 24) m
   | m >= 60 = clock (Clock (h + (m `div` 60)) (m `mod` 60))
-  | otherwise = clock (Clock (h + ((m `div` 60) - 1)) (60 + (m `mod` 60)))
 
 fromHourMin :: Int -> Int -> Clock
 fromHourMin h m
@@ -15,8 +14,8 @@ addDelta :: Int -> Int -> Clock -> Clock
 addDelta dh dm (Clock h m) = clock (Clock (h + dh) (m + dm))
 
 toString :: Clock -> String
-toString (Clock h m) = padZero h ++ ":" ++ padZero m
+toString (Clock h m) = addZero h ++ ":" ++ addZero m
   where
-    padZero n
+    addZero n
       | n < 10 = "0" ++ show n
       | otherwise = show n
