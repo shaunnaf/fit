@@ -14,7 +14,6 @@ collatz 1 = [1]
 collatz n | even n    = [n] ++ collatz (n `div` 2)
           | otherwise = [n] ++ collatz (3 * n + 1)
 
-
 spread :: a -> [a] -> [[a]]
 spread x [] = [[x]]
 spread x (y:ys) = (x:y:ys) : (map (y:) (spread x ys))

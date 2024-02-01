@@ -1043,3 +1043,4 @@ dkms.conf
 *.dis
 
 *.txt
+*.vscode
