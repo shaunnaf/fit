@@ -1,64 +1,105 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-long long chinese_remainder_theorem(int k, long long M, long long* arr_moduls,
-                                    long long* arr_ost);
-long long extended_gcd(long long a, long long b, long long* x, long long* y);
+long long int modMul(long long int a, long long int b, long long int mod);
+long long int gcd(long long int a, long long int b);
+long long int fastpow(long long int base, long long int exponent,
+                      long long int mod);
+long long int eyler(long long int n);
+long long int china(long long int* ost, long long int* mod, long long int k);
 
 int main() {
   FILE* mf;
-  unsigned long long count_moduls;
-  unsigned long long M = 1;
-
   mf = fopen("input.txt", "r");
   if (mf == NULL) {
-    fprintf(stderr, "error_open_file");
+    fprintf(stderr, "error open file");
     return 1;
   }
-  if (fscanf(mf, "%lld", &count_moduls) != 1) {
+  long long int k;
+  if (fscanf(mf, "%lld", &k) != 1) {
     fprintf(stderr, "error_input");
     fclose(mf);
-    return 2;
+    return 1;
   }
-  long long* arr_moduls = malloc(count_moduls * sizeof(unsigned long long));
-  long long* arr_ost = malloc(count_moduls * sizeof(unsigned long long));
-  for (unsigned long long j = 0; j < count_moduls; j++) {
-    fscanf(mf, "%lld", &arr_moduls[j]);
-    M *= arr_moduls[j];
+  long long int* mod = malloc(sizeof(long long int) * k);
+  long long int* ost = malloc(sizeof(long long int) * k);
+  for (long long int i = 0; i < k; i++) {
+    if (fscanf(mf, "%lld", &mod[i]) != 1) {
+      fprintf(stderr, "error_input");
+      free(ost);
+      free(mod);
+      fclose(mf);
+      return 1;
+    }
   }
-  for (unsigned long long j = 0; j < count_moduls; j++) {
-    fscanf(mf, "%lld", &arr_ost[j]);
+  for (long long int i = 0; i < k; i++) {
+    if (fscanf(mf, "%lld", &ost[i]) != 1) {
+      fprintf(stderr, "error_input");
+      free(ost);
+      free(mod);
+      fclose(mf);
+      return 1;
+    }
   }
-  long long x = chinese_remainder_theorem(count_moduls, M, arr_moduls, arr_ost);
-  printf("%lld", x);
-  free(arr_moduls);
-  free(arr_ost);
+  long long int result = china(ost, mod, k);
+  printf("%lld\n", result);
+
+  free(mod);
+  free(ost);
   fclose(mf);
+
   return 0;
 }
 
-long long extended_gcd(long long a, long long b, long long* x, long long* y) {
-  if (b == 0) {
-    *x = 1;
-    *y = 0;
-    return a;
-  }
-  long long x1, y1;
-  long long gcd = extended_gcd(b, a % b, &x1, &y1);
-  *x = y1;
-  *y = x1 - (a / b) * y1;
-  return gcd;
+long long int modMul(long long int a, long long int b, long long int mod) {
+  return ((a % mod) * (b % mod)) % mod;
 }
 
-long long chinese_remainder_theorem(int count_moduls, long long M,
-                                    long long* arr_moduls, long long* arr_ost) {
-  long long X = 0;
-  for (int i = 0; i < count_moduls; ++i) {
-    long long m = M / arr_moduls[i];
-    long long x, y;
-    extended_gcd(m, arr_moduls[i], &x, &y);
-    X += arr_ost[i] * m * x;
-  }
+long long int gcd(long long int a, long long int b) {
+  return (b == 0 ? a : gcd(b, a % b));
+}
 
-  return (X % M + M) % M;
+long long int fastpow(long long int base, long long int exponent,
+                      long long int mod) {
+  long long int result = 1;
+  while (exponent > 0) {
+    if (exponent % 2 == 1) {
+      result = (result * base) % mod;
+    }
+    base = (base * base) % mod;
+    exponent /= 2;
+  }
+  return result;
+}
+
+long long int eyler(long long int n) {
+  long long int result = n;
+  for (long long int i = 2; i * i <= n; i++) {
+    if (n % i == 0) {
+      while (n % i == 0) {
+        n /= i;
+      }
+      result -= result / i;
+    }
+  }
+  if (n > 1) {
+    result -= result / n;
+  }
+  return result;
+}
+
+long long int china(long long int* ost, long long int* mod, long long int k) {
+  long long int M = 1;
+  long long int mi, inverse_mi;
+  for (long long int i = 0; i < k; i++) {
+    M *= mod[i];
+  }
+  long long int ans = 0;
+  for (long long int i = 0; i < k; i++) {
+    mi = M / mod[i];
+    inverse_mi = fastpow(mi % mod[i], eyler(mod[i]) - 1, mod[i]);
+    ans += modMul(ost[i], inverse_mi, mod[i]) * mi;
+    ans %= M;
+  }
+  return ans;
 }
