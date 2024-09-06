@@ -1,15 +1,18 @@
-#ifndef INTEGER_SET_H
-#define INTEGER_SET_H
+#ifndef INTEGERSET_H
+#define INTEGERSET_H
 
-#include <stdlib.h>
+typedef struct Node {
+  int value;
+  struct Node* next;
+} Node;
 
 typedef struct {
-  int* elements;
-  int size;
+  Node** buckets;
+  int capacity;
 } IntegerSet;
 
-IntegerSet* CreateSet(int* array, int size);
-int IsInSet(IntegerSet* set, int number);
+IntegerSet* CreateSet(const int* elements, int numElements);
 void DeleteSet(IntegerSet* set);
+int IsInSet(const IntegerSet* set, int element);
 
 #endif
